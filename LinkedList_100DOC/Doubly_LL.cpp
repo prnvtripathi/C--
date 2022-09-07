@@ -42,6 +42,49 @@ int length( struct node *p){
     return length;
 }
 
+void insert(int value){
+    struct node *t;
+    t = new struct node;
+    t -> data = value;
+    t -> next = first;
+    t -> prev = NULL;
+    first -> prev = t;
+    first = t;
+}
+
+void insert(int value, int index){
+    struct node *t, *p = first;
+    t = new struct node;
+    t -> data = value;
+    for(int i = 0; i < index; i++){
+        p = p -> next;
+    }
+    t -> next = p -> next;
+    t -> prev = p;
+    if(p -> next)
+        p -> next -> prev = t;
+    p -> next = t;
+}
+
+void removeFirst()
+{
+    struct node *p;
+    p = first;
+    first = first -> next;
+    delete p;
+}
+
+void remove(int index)
+{
+    struct node *p = first;
+    for(int i = 0; i < index; i++)
+        p = p -> next;
+    p -> prev -> next = p -> next;
+    if(p -> next)
+        p -> next -> prev = p -> prev;
+    delete p;
+}
+
 int main()
 {
     int a[] = {1,2,3,4,5,6,7};
