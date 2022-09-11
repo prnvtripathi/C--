@@ -83,7 +83,7 @@ int Array::remove(int index)
             A[i]=A[i+1];
     length--;
     }
-    return x;//to show wchich element is deleted
+    return x;//to show which element is deleted
 }
 
 int Array::get(int index)
