@@ -1,3 +1,4 @@
+// Binary search in an array
 #include <stdio.h>
 
 int binary_search(int a[], int length, int target)
