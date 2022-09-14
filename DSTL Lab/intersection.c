@@ -1,7 +1,7 @@
 #include <stdio.h>
 int main()
 {
-    int a[10], b[10], c[20], flag = 0, n1, n2, i, j, k = 0;
+    int a[10], b[10], c[20], n1, n2, i, j, k = 0;
     printf("Enter array1 size : ");
     scanf("%d", &n1);
 
@@ -23,14 +23,9 @@ int main()
         {
             if (b[i] == a[j])
             {
-                flag = 1;
+                c[k++] = b[i];
             }
         }
-        if (flag == 1)
-        {
-            c[k++] = b[i];
-        }
-        flag = 0;
     }
 
     for (i = 0; i < k; i++)
