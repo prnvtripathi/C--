@@ -11,7 +11,7 @@ int main(){
     
     length = strlen(string1);
     
-    for(i=0;i < length ;i++){
+    for(i=0;i < length/2 ;i++){
         if(string1[i] != string1[length-i-1]){
             flag = 1;
             break;
