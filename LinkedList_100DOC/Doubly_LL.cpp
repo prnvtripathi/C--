@@ -1,99 +1,208 @@
 #include <iostream>
 using namespace std;
 
-struct node
+class Node
 {
-    int data;                           // to store data in the nodes
-    struct node* prev;                  // previous node
-    struct node* next;                  // next node
-}*first = NULL;
+public:
+    Node *prev;
+    int data;
+    Node *next;
+};
 
-void create(int a[], int n){
-    struct node *t, *last;
-    first = new struct node;    // create new node
-    first -> data = a[0];                 //data
-    first -> prev = NULL;
-    first -> next = NULL;
-    last = first;
-    for(int i = 1; i < n; i++){
-        t = new struct node; // create new nodes
-        t -> data = a[i];
-        t -> next = last -> next; // next node
-        t -> prev  = last;
-        last -> next = t;
-        last = t;
+class DoublyLinkedList
+{
+private:
+    Node *head;
+
+public:
+    DoublyLinkedList();
+    DoublyLinkedList(int A[], int n);
+    ~DoublyLinkedList();
+    void Display();
+    int Length();
+    void Insert(int index, int x);
+    int Delete(int index);
+    void Reverse();
+};
+
+DoublyLinkedList::DoublyLinkedList()
+{
+    head = new Node;
+    head->prev = nullptr;
+    head->data = 0;
+    head->next = nullptr;
+}
+
+DoublyLinkedList::DoublyLinkedList(int *A, int n)
+{
+
+    head = new Node;
+    head->prev = nullptr;
+    head->data = A[0];
+    head->next = nullptr;
+    Node *tail = head;
+
+    for (int i = 1; i < n; i++)
+    {
+        Node *t = new Node;
+        t->prev = tail;
+        t->data = A[i];
+        t->next = tail->next; // tail->next is pointing to NULL
+        tail->next = t;
+        tail = t;
     }
 }
 
-void display( struct node *p){
-    while(p){
-        cout << p -> data << " ";
-        p = p -> next;
+void DoublyLinkedList::Display()
+{
+    Node *p = head;
+    while (p != nullptr)
+    {
+        cout << p->data << flush;
+        p = p->next;
+        if (p != nullptr)
+        {
+            cout << " <-> " << flush;
+        }
     }
     cout << endl;
 }
 
-int length( struct node *p){
+int DoublyLinkedList::Length()
+{
     int length = 0;
-    while(p){
-        p = p -> next;
+    Node *p = head;
+    while (p != nullptr)
+    {
         length++;
+        p = p->next;
     }
     return length;
 }
 
-void insert(int value){
-    struct node *t;
-    t = new struct node;
-    t -> data = value;
-    t -> next = first;
-    t -> prev = NULL;
-    first -> prev = t;
-    first = t;
-}
+void DoublyLinkedList::Insert(int index, int x)
+{
 
-void insert(int value, int index){
-    struct node *t, *p = first;
-    t = new struct node;
-    t -> data = value;
-    for(int i = 0; i < index; i++){
-        p = p -> next;
+    if (index < 0 || index > Length())
+    {
+        return;
     }
-    t -> next = p -> next;
-    t -> prev = p;
-    if(p -> next)
-        p -> next -> prev = t;
-    p -> next = t;
+
+    Node *p = head;
+    Node *t = new Node;
+    t->data = x;
+
+    if (index == 0)
+    {
+        t->prev = nullptr;
+        t->next = head;
+        head->prev = t;
+        head = t;
+    }
+    else
+    {
+        for (int i = 0; i < index - 1; i++)
+        {
+            p = p->next;
+        }
+        t->prev = p;
+        t->next = p->next;
+        if (p->next)
+        {
+            p->next->prev = t;
+        }
+        p->next = t;
+    }
 }
 
-void removeFirst()
+int DoublyLinkedList::Delete(int index)
 {
-    struct node *p;
-    p = first;
-    first = first -> next;
-    delete p;
+    int x = -1;
+    Node *p = head;
+
+    if (index < 0 || index > Length())
+    {
+        return x;
+    }
+
+    if (index == 1)
+    {
+        head = head->next;
+        if (head)
+        {
+            head->prev = nullptr;
+        }
+        x = p->data;
+        delete p;
+    }
+    else
+    {
+        for (int i = 0; i < index - 1; i++)
+        {
+            p = p->next;
+        }
+        p->prev->next = p->next;
+        if (p->next)
+        {
+            p->next->prev = p->prev;
+        }
+        x = p->data;
+        delete p;
+    }
+    return x;
 }
 
-void remove(int index)
+void DoublyLinkedList::Reverse()
 {
-    struct node *p = first;
-    for(int i = 0; i < index; i++)
-        p = p -> next;
-    p -> prev -> next = p -> next;
-    if(p -> next)
-        p -> next -> prev = p -> prev;
-    delete p;
+    Node *p = head;
+    Node *temp;
+    while (p != nullptr)
+    {
+        temp = p->next;
+        p->next = p->prev;
+        p->prev = temp;
+        p = p->prev;
+
+        // Need to check the following condition again
+        if (p->next == nullptr)
+        {
+            p->next = p->prev;
+            p->prev = nullptr;
+            head = p;
+            break;
+        }
+    }
+}
+
+DoublyLinkedList::~DoublyLinkedList()
+{
+    Node *p = head;
+    while (head)
+    {
+        head = head->next;
+        delete p;
+        p = head;
+    }
 }
 
 int main()
 {
-    int a[] = {1,2,3,4,5,6,7};
 
-    create(a, 7);
+    int A[]{1, 3, 5, 7, 9};
 
-    cout<<"\nLength of the linked list : "<<length(first)<<endl;
+    DoublyLinkedList dll(A, sizeof(A) / sizeof(A[0]));
+    cout << "Length: " << dll.Length() << endl;
 
-    display(first);
+    dll.Insert(0, 11);
+    dll.Insert(6, 13);
+    dll.Display();
+
+    dll.Delete(1);
+    dll.Delete(6);
+    dll.Display();
+
+    dll.Reverse();
+    dll.Display();
 
     return 0;
 }
