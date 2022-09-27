@@ -27,10 +27,46 @@ void create(int a[], int n)
 
 void display(struct node *p)
 {
-    while(p)
+    while (p)
     {
-       printf("%d ", p -> data);
-       p = p -> next; 
+        printf("%d ", p->data);
+        p = p->next;
+    }
+}
+
+void insertAtBeginning(int x)
+{
+    struct node *p = (struct node *)malloc(sizeof(struct node));
+    p->data = x;
+    if (first)
+    {
+        p->next = first;
+        first = p;
+    }
+    else
+    {
+        first = p;
+        p->next = NULL;
+    }
+}
+
+void insertAtEnd(int x)
+{
+    struct node *p = first;
+    struct node *q = (struct node *)malloc(sizeof(struct node));
+    q->data = x;
+    if (first)
+    {
+        while (p->next)
+            p = p->next;
+
+        p->next = q;
+        q->next = NULL;
+    }
+    else
+    {
+        q->next = NULL;
+        first = q;
     }
 }
 
@@ -38,6 +74,10 @@ int main()
 {
     int a[10] = {1, 2, 3, 5, 6, 9, 12, 76, 34, 32};
     create(a, 10);
+    display(first);
+    printf("\n");
+    insertAtBeginning(99);
+    insertAtEnd(15);
     display(first);
     return 0;
 }
