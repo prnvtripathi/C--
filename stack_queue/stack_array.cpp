@@ -1,50 +1,85 @@
 #include <iostream>
 using namespace std;
 
-int stack[100], n = 100, top = -1;
-
-void push(int val)
+struct stack
 {
-    if (top >= n - 1)
+    int size;
+    int top;
+    int *s;
+} st;
+
+void push(stack *p, int val)
+{
+    if (p->top >= p->size - 1)
         cout << "Stack Overflow" << endl;
     else
     {
-        top++;
-        stack[top] = val;
+        p->top++;
+        p->s[p->top] = val;
     }
 }
 
-void pop()
+void pop(stack *p)
 {
-    if (top <= -1)
+    if (p->top <= -1)
         cout << "Stack Underflow" << endl;
     else
     {
-        cout << "The popped element is " << stack[top] << endl;
-        top--;
+        cout << "The popped element is " << p->s[p->top] << endl;
+        p->top--;
     }
 }
 
-void display()
+void display(stack p)
 {
-    if (top >= 0)
+    if (p.top >= 0)
     {
         cout << "Stack elements are:";
-        for (int i = top; i >= 0; i--)
-            cout << stack[i] << " ";
+        for (int i = p.top; i >= 0; i--)
+            cout << p.s[i] << " ";
         cout << endl;
     }
     else
         cout << "Stack is empty";
 }
 
+bool isEmpty()
+{
+    if (st.top == -1)
+        return true;
+    return false;
+}
+
+bool isFull()
+{
+    if (st.top == st.size - 1)
+        return true;
+    return false;
+}
+
+int peek(stack p, int pos)
+{
+    int x = -1;
+    if (p.top - pos + 1)
+        cout << "\nInvalid Position";
+    else
+        x = p.s[p.top - pos + 1];
+    return x;
+}
+
 int main()
 {
+    cout << "Enter size of stack: ";
+    cin >> st.size;
+    st.s = new int[st.size];
+    st.top = -1;
+
     int ch, val;
     cout << "1) Push in stack" << endl;
     cout << "2) Pop from stack" << endl;
     cout << "3) Display stack" << endl;
-    cout << "4) Exit" << endl;
+    cout << "4) Peek Index" << endl;
+    cout << "5) Exit" << endl;
     do
     {
         cout << "Enter choice: " << endl;
@@ -69,6 +104,11 @@ int main()
             break;
         }
         case 4:
+        {
+            peek();
+            break;
+        }
+        case 5:
         {
             cout << "Exit" << endl;
             break;
