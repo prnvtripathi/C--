@@ -60,10 +60,9 @@ bool isFull()
 int peek(stack p, int pos)
 {
     int x = -1;
-    if (p.top - pos + 1)
+    if (p.top - pos + 1 < 0)
         cout << "\nInvalid Position";
-    else
-        x = p.s[p.top - pos + 1];
+    x = p.s[p.top - pos + 1];
     return x;
 }
 
@@ -98,9 +97,9 @@ int main()
             display(st);
             break;
         case 4:
-            cout << "What position you want to peek on?: ";
+            cout << "What position you want to peek on?: " << endl;
             cin >> pos;
-            peek(st, pos);
+            cout << peek(st, pos);
             break;
         case 5:
             cout << "Exit" << endl;
