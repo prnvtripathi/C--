@@ -74,7 +74,7 @@ int main()
     st.s = new int[st.size];
     st.top = -1;
 
-    int ch, val;
+    int ch, val, pos;
     cout << "1) Push in stack" << endl;
     cout << "2) Pop from stack" << endl;
     cout << "3) Display stack" << endl;
@@ -87,36 +87,26 @@ int main()
         switch (ch)
         {
         case 1:
-        {
             cout << "Enter value to be pushed:" << endl;
             cin >> val;
-            push(val);
+            push(&st, val);
             break;
-        }
         case 2:
-        {
-            pop();
+            pop(&st);
             break;
-        }
         case 3:
-        {
-            display();
+            display(st);
             break;
-        }
         case 4:
-        {
-            peek();
+            cout << "What position you want to peek on?: ";
+            cin >> pos;
+            peek(st, pos);
             break;
-        }
         case 5:
-        {
             cout << "Exit" << endl;
             break;
-        }
         default:
-        {
             cout << "Invalid Choice" << endl;
-        }
         }
     } while (ch != 4);
     return 0;
