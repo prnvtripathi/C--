@@ -5,39 +5,39 @@ struct node
 {
     int data;
     struct node *next;
-} *first = NULL;
+} *head = NULL;
 
 void push(int val)
 {
     struct node *p = new struct node;
     p->data = val;
-    if (first == NULL)
+    if (head == NULL)
         p->next = NULL;
     else
-        p->next = first;
-    first = p;
+        p->next = head;
+    head = p;
 }
 
 void pop()
 {
-    if (first == NULL)
+    if (head == NULL)
         cout << "Underflow !!";
     else
     {
-        struct node *temp = first;
+        struct node *temp = head;
         cout << "Deleted data: " << temp->data << endl;
-        first = temp->next;
+        head = temp->next;
         delete temp;
     }
 }
 
 void display()
 {
-    if (first == NULL)
+    if (head == NULL)
         cout << "Stack underflow!" << endl;
     else
     {
-        struct node *temp = first;
+        struct node *temp = head;
         cout << "Stack :" << endl;
         while (temp->next != NULL)
         {
