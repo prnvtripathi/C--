@@ -18,6 +18,8 @@ public:
     DoublyLinkedList();
     DoublyLinkedList(int A[], int n);
     ~DoublyLinkedList();
+    void insertAtBeg(int val);
+    void insertAtLast(int val);
     void Display();
     int Length();
     void Insert(int index, int x);
@@ -72,7 +74,7 @@ int DoublyLinkedList::Length()
 {
     int length = 0;
     Node *p = head;
-    while (p != nullptr)
+    while (p != NULL)
     {
         length++;
         p = p->next;
@@ -94,7 +96,7 @@ void DoublyLinkedList::Insert(int index, int x)
 
     if (index == 0)
     {
-        t->prev = nullptr;
+        t->prev = NULL;
         t->next = head;
         head->prev = t;
         head = t;
@@ -102,9 +104,7 @@ void DoublyLinkedList::Insert(int index, int x)
     else
     {
         for (int i = 0; i < index - 1; i++)
-        {
             p = p->next;
-        }
         t->prev = p;
         t->next = p->next;
         if (p->next)
@@ -185,6 +185,56 @@ DoublyLinkedList::~DoublyLinkedList()
     }
 }
 
+void DoublyLinkedList::insertAtBeg(int val)
+{
+    Node *p = new Node;
+    if (p == NULL)
+        cout << "Overflow";
+    else
+    {
+        if (head == NULL)
+        {
+            p->data = val;
+            p->next = NULL;
+            p->prev = NULL;
+            head = p;
+        }
+        else
+        {
+            p->data = val;
+            p->prev = NULL;
+            p->next = head;
+            head->prev = p;
+            head = p;
+        }
+    }
+}
+
+void DoublyLinkedList::insertAtLast(int val)
+{
+    Node *temp, *p = new Node;
+    if (p == NULL)
+        cout << "Overflow!";
+    else
+    {
+        p->data = val;
+        if (head == NULL)
+        {
+            p->next = p->prev = NULL;
+            head = p;
+        }
+        else
+        {
+            temp = head;
+            while (temp->next)
+                temp = temp->next;
+            temp->next = p;
+            p->prev = temp;
+            p->next = NULL;
+        }
+    }
+}
+
 int main()
 {
 
@@ -197,11 +247,8 @@ int main()
     dll.Insert(6, 13);
     dll.Display();
 
-    dll.Delete(1);
-    dll.Delete(6);
-    dll.Display();
-
-    dll.Reverse();
+    dll.insertAtBeg(44);
+    dll.insertAtLast(99);
     dll.Display();
 
     return 0;

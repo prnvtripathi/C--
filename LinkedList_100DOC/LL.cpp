@@ -34,12 +34,12 @@ void display(struct node *p)
     }
 }
 
-void rdisplay(struct node *p) // recursive function to display
+void rDisplay(struct node *p) // recursive function to display
 {
     if (p)
     {
         cout << p->data << " ";
-        rdisplay(p->next);
+        rDisplay(p->next);
     }
 }
 
@@ -128,7 +128,7 @@ void insert(int index, int value)
     }
 }
 
-void sortinsert(int value)
+void sortInsert(int value)
 {
     node *t, *p, *q;
     p = first;
