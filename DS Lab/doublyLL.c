@@ -113,7 +113,7 @@ int main()
     insertAtEnd(20);
     insertAtBeg(30);
     display();
-    delete(1);
+    delete (1);
     display();
     printf("length of linked-list: %d", length());
     return 0;
