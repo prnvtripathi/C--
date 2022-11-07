@@ -81,7 +81,7 @@ int length()
     return length;
 }
 
-void delete (int index)
+void delete(int index)
 {
     if (index < 0 || index > length())
         printf("Deletion not possible");
@@ -104,6 +104,44 @@ void delete (int index)
         if (p->next)
             p->next->prev = p->prev;
         free(p);
+    }
+}
+
+void delAtBeg()
+{
+    struct node *temp = head;
+    if (head == NULL)
+        return;
+    else
+    {
+        head = head->next;
+        head->prev = NULL;
+        printf("Deleted data: %d", temp->data);
+        free(temp);
+    }
+}
+
+void last_delete()
+{
+    struct node *ptr;
+    if (head == NULL)
+    {
+        printf("\n UNDERFLOW\n");
+    }
+    else if (head->next == NULL)
+    {
+        head = NULL;
+        free(head);
+        printf("\nNode Deleted\n");
+    }
+    else
+    {
+        ptr = head;
+        while (ptr->next)
+            ptr = ptr->next;
+        ptr->prev->next = NULL;
+        free(ptr);
+        printf("\nNode Deleted\n");
     }
 }
 
