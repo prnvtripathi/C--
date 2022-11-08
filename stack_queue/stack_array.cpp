@@ -103,7 +103,7 @@ int main()
             break;
         case 5:
             cout << "Exit" << endl;
-            break;
+            return 0;
         default:
             cout << "Invalid Choice" << endl;
         }
