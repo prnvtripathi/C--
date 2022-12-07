@@ -3,7 +3,7 @@
 
 void indexedSequentialSearch(int arr[], int n, int k)
 {
-    int GN = 3;
+    const int GN = 3;
     int elements[GN], indices[GN], i, set = 0;
     int j = 0, ind = 0, start, end;
     for (i = 0; i < n; i += 3)
@@ -47,12 +47,13 @@ void indexedSequentialSearch(int arr[], int n, int k)
         printf("Not found");
 }
 
-void main()
+int main()
 {
 
     int arr[] = {6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     int n = sizeof(arr) / sizeof(arr[0]);
 
-    int k = 9;
+    int k = 12;
     indexedSequentialSearch(arr, n, k);
+    return 0;
 }
