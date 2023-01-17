@@ -23,8 +23,7 @@ void createList()
             newnode = malloc(sizeof(struct node));
             start = newnode;
             temp = start;
-            printf("\nEnter number to"
-                   " be inserted : ");
+            printf("\nEnter number to be inserted : ");
             scanf("%d", &data);
             start->data = data;
 
@@ -32,8 +31,7 @@ void createList()
             {
                 newnode = malloc(sizeof(struct node));
                 temp->next = newnode;
-                printf("\nEnter number to"
-                       " be inserted : ");
+                printf("\nEnter number to be inserted : ");
                 scanf("%d", &data);
                 newnode->data = data;
                 temp = temp->next;
@@ -70,8 +68,7 @@ void insertAtFront()
     int data;
     struct node *temp;
     temp = malloc(sizeof(struct node));
-    printf("\nEnter number to"
-           " be inserted : ");
+    printf("\nEnter number to be inserted : ");
     scanf("%d", &data);
     temp->data = data;
 
@@ -84,18 +81,14 @@ void insertAtEnd()
     int data;
     struct node *temp, *head;
     temp = malloc(sizeof(struct node));
-
-    printf("\nEnter number to"
-           " be inserted : ");
+    printf("\nEnter number to be inserted : ");
     scanf("%d", &data);
 
     temp->next = 0;
     temp->data = data;
     head = start;
     while (head->next != NULL)
-    {
         head = head->next;
-    }
     head->next = temp;
 }
 
@@ -105,7 +98,6 @@ void insertAtPosition()
     int pos, data, i = 1;
     newnode = malloc(sizeof(struct node));
 
-    // Enter the position and data
     printf("\nEnter position and data :");
     scanf("%d %d", &pos, &data);
 
@@ -164,7 +156,6 @@ void deletePosition()
     else
     {
         printf("\nEnter index : ");
-
         scanf("%d", &pos);
         position = malloc(sizeof(struct node));
         temp = start;
@@ -223,20 +214,13 @@ int main()
     {
 
         printf("\n\t1 To see list\n");
-        printf("\t2 For insertion at"
-               " starting\n");
-        printf("\t3 For insertion at"
-               " end\n");
-        printf("\t4 For insertion at "
-               "any position\n");
-        printf("\t5 For deletion of "
-               "first element\n");
-        printf("\t6 For deletion of "
-               "last element\n");
-        printf("\t7 For deletion of "
-               "element at any position\n");
-        printf("\t8 To reverse the "
-               "nexted list\n");
+        printf("\t2 For insertion at starting\n");
+        printf("\t3 For insertion at end\n");
+        printf("\t4 For insertion at any position\n");
+        printf("\t5 For deletion of first element\n");
+        printf("\t6 For deletion of last element\n");
+        printf("\t7 For deletion of element at any position\n");
+        printf("\t8 To reverse the nexted list\n");
         printf("\t9 To exit\n");
         printf("\nEnter Choice :\n");
         scanf("%d", &choice);
