@@ -1,68 +1,84 @@
 #include <stdio.h>
 
-void merge(int arr[], int l, int m, int r)
+/* Function to merge the subarrays of a[] */
+void merge(int a[], int beg, int mid, int end)
 {
     int i, j, k;
-    int n1 = m - l + 1;
-    int n2 = r - m;
+    int n1 = mid - beg + 1;
+    int n2 = end - mid;
 
-    // temporary arrays
-    int L[n1], R[n2];
+    int L[n1], R[n2]; // temporary arrays
 
-    for (i = 0; i < n1; i++)
-        L[i] = arr[l + i];
-    for (j = 0; j < n2; j++)
-        R[j] = arr[m + 1 + j];
+    for (int i = 0; i < n1; i++)
+        L[i] = a[beg + i];
+    for (int j = 0; j < n2; j++)
+        R[j] = a[mid + 1 + j];
 
     i = 0;
     j = 0;
-    k = l;
+    k = beg;
 
     while (i < n1 && j < n2)
     {
         if (L[i] <= R[j])
-            arr[k] = L[i++];
+        {
+            a[k] = L[i];
+            i++;
+        }
         else
-            arr[k] = R[j++];
+        {
+            a[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+    while (i < n1)
+    {
+        a[k] = L[i];
+        i++;
         k++;
     }
 
-    while (i < n1)
-        arr[k++] = L[i++];
-
     while (j < n2)
-        arr[k++] = R[j++];
-}
-
-void mergeSort(int arr[], int l, int r)
-{
-    if (l < r)
     {
-        int m = l + (r - 1) / 2;
-        mergeSort(arr, l, m);
-        mergeSort(arr, m + 1, r);
-
-        merge(arr, l, m, r);
+        a[k] = R[j];
+        j++;
+        k++;
     }
 }
 
+void mergeSort(int a[], int beg, int end)
+{
+    if (beg < end)
+    {
+        int mid = (beg + end) / 2;
+        mergeSort(a, beg, mid);
+        mergeSort(a, mid + 1, end);
+        merge(a, beg, mid, end);
+    }
+}
+
+/* Function to print the array */
 void display(int a[], int n)
 {
-    for (int i = 0; i < n; i++)
-        printf("%3d", a[i]);
+    int i;
+    for (i = 0; i < n; i++)
+        printf("%d ", a[i]);
+    printf("\n");
 }
 
 int main()
 {
-    int arr[] = {12, 11, 13, 5, 6, 7};
-    int arr_size = sizeof(arr) / sizeof(arr[0]);
+    int a[] = {12, 31, 25, 8, 32, 17, 40, 42};
+    int n = sizeof(a) / sizeof(a[0]);
 
-    printf("Given array is \n");
-    display(arr, arr_size);
+    printf("Before sorting array elements are - \n");
+    display(a, n);
 
-    mergeSort(arr, 0, arr_size - 1);
+    mergeSort(a, 0, n - 1);
 
-    printf("\nSorted array is \n");
-    display(arr, arr_size);
+    printf("After sorting array elements are - \n");
+    display(a, n);
+
     return 0;
 }
