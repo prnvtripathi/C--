@@ -7,7 +7,7 @@ void indexedSequentialSearch(int arr[], int n, int target)
 {
 
     int elements[GN], indices[GN], i, set = 0;
-    int j = 0, ind = 0, start, end;
+    int flag = 0, ind = 0, start, end;
 
     for (i = 0; i < n; i += 3)
     {
@@ -46,12 +46,12 @@ void indexedSequentialSearch(int arr[], int n, int target)
     {
         if (target == arr[i])
         {
-            j = 1;
+            flag = 1;
             break;
         }
     }
 
-    if (j == 1)
+    if (flag == 1)
         printf("Found at index %d", i);
     else
         printf("Not found");

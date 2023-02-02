@@ -1,3 +1,4 @@
+//only used when array is given with format of 1-N elements
 #include <stdio.h>
 
 void cycle(int a[], int n)
@@ -8,6 +9,7 @@ void cycle(int a[], int n)
         int correctIndex = a[i] - 1;
         if (a[i] != a[correctIndex])
         {
+            //swapping
             int temp = a[i];
             a[i] = a[correctIndex];
             a[correctIndex] = temp;

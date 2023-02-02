@@ -4,9 +4,9 @@ void insertion(int a[], int n)
 {
     for (int i = 0; i < n - 1; i++)
     {
-        for (int j = i + 1; j > 0; j--)
+        for (int j = i + 1; j > 0; j--) //checking the array from the ith position towards 0
         {
-            if (a[j] < a[j - 1])
+            if (a[j] < a[j - 1]) //if an element is smaller than prev then swap
             {
                 int temp = a[j];
                 a[j] = a[j - 1];

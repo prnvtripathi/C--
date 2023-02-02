@@ -6,7 +6,7 @@ void selection(int a[], int n)
     {
         int small = i; // minimum element in the unsorted array
         for (int j = i + 1; j < n; j++)
-            if (a[j] < a[small])
+            if (a[j] < a[small]) //check if any else minimum element is present or not
                 small = j;
         //swap the found minimum element with the first element
         int temp = a[small];
