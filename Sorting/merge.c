@@ -36,7 +36,7 @@ void merge(int a[], int beg, int mid, int end)
     {
         a[k] = L[i];
         i++;
-        k++;
+        k++;R
     }
 
     while (j < n2)
